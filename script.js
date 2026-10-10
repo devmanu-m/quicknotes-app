@@ -8,7 +8,23 @@ const noteCount = document.querySelector("#note-count");
 const errorMessage = document.querySelector("#error-message");
 
 const MAX_CHARS = 200;
-let notes = [];
+let notes = loadNotes();
+
+function saveNotes() {
+  localStorage.setItem("notes", JSON.stringify(notes));
+}
+
+function loadNotes() {
+  const saved = localStorage.getItem("notes");
+  if (saved === null) {
+    return [];
+  }
+  try {
+    return JSON.parse(saved);
+  } catch (error) {
+    return [];
+  }
+}
 
 // ---------- Build one note card (textContent only, never innerHTML) ----------
 function createNoteCard(note) {
@@ -67,6 +83,7 @@ function deleteNote(id) {
   notes = notes.filter(function (note) {
     return note.id !== id;
   });
+  saveNotes();
   render();
 }
 
@@ -94,9 +111,29 @@ form.addEventListener("submit", function (event) {
     createdAt: new Date().toLocaleString(),
   };
 
-  notes.unshift(note);
+  notes.unshift(note); 
+  saveNotes();
   noteInput.value = "";
-  render();
-});
+  function render() {
+  const search = searchInput.value.trim().toLowerCase();
+  const visibleNotes = notes.filter(function (note) {
+    return note.text.toLowerCase().includes(search);
+  });
 
+  notesList.textContent = "";
+
+  if (visibleNotes.length === 0 && search !== "") {
+    const empty = document.createElement("li");
+    empty.classList.add("empty-message");
+    empty.textContent = "No notes match your search.";
+    notesList.appendChild(empty);
+  }
+
+  for (const note of visibleNotes) {
+    notesList.appendChild(createNoteCard(note));
+  }
+  updateCount();
+}
+});
+searchInput.addEventListener("input", render);
 render();
