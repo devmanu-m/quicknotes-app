@@ -1,0 +1,204 @@
+/* ---------- Reset and base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+  color: #222;
+  background-color: #f4f5f7;
+}
+
+header {
+  background-color: #1f2a44;
+  color: #fff;
+  text-align: center;
+  padding: 32px 16px;
+}
+
+header h1 {
+  margin: 0 0 8px;
+}
+
+header p {
+  margin: 0;
+}
+
+main {
+  max-width: 700px;
+  margin: 24px auto;
+  padding: 0 16px;
+}
+
+section {
+  background-color: #fff;
+  padding: 24px;
+  margin-bottom: 24px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+section h2 {
+  margin-top: 0;
+}
+
+footer {
+  text-align: center;
+  padding: 24px 16px;
+  color: #555;
+}
+
+/* ---------- Form (Flexbox) ---------- */
+#note-form {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+.field-grow {
+  flex: 1;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+input,
+select {
+  padding: 10px;
+  border: 1px solid #999;
+  border-radius: 4px;
+  font: inherit;
+}
+
+#search-input {
+  width: 100%;
+}
+
+#error-message {
+  color: #c00;
+  font-weight: bold;
+  margin: 8px 0 0;
+}
+
+/* ---------- Buttons ---------- */
+button {
+  background-color: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font: inherit;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover,
+button:focus {
+  background-color: #1d4ed8;
+}
+
+/* ---------- Note cards ---------- */
+#notes-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.note {
+  padding: 16px;
+  margin-bottom: 12px;
+  border: 1px solid #ddd;
+  border-left-width: 6px;
+  border-radius: 8px;
+  background-color: #fafafa;
+}
+
+.note-text {
+  margin: 0 0 8px;
+  font-size: 1.1rem;
+  overflow-wrap: anywhere;
+}
+
+.note-meta {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin: 0 0 12px;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.category-label {
+  padding: 2px 8px;
+  border-radius: 12px;
+  color: #fff;
+  font-weight: bold;
+}
+
+/* One style per category */
+.category-personal {
+  border-left-color: #0f766e;
+}
+.category-work {
+  border-left-color: #991b1b;
+}
+.category-study {
+  border-left-color: #1d4ed8;
+}
+
+.category-personal .category-label {
+  background-color: #0f766e;
+}
+.category-work .category-label {
+  background-color: #991b1b;
+}
+.category-study .category-label {
+  background-color: #1d4ed8;
+}
+
+.delete-btn {
+  background-color: #b91c1c;
+  padding: 6px 14px;
+}
+
+.delete-btn:hover,
+.delete-btn:focus {
+  background-color: #7f1d1d;
+}
+
+.empty-message {
+  color: #555;
+  font-style: italic;
+}
+
+/* ---------- Small screens ---------- */
+@media (max-width: 600px) {
+  header {
+    padding: 20px 12px;
+  }
+
+  section {
+    padding: 16px;
+  }
+
+  #note-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .field-grow {
+    flex: none;
+  }
+}
